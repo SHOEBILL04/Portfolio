@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, type ReactNode } from 'react'
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface StatCard { label: string; value: number; suffix: string; prefix?: string; accent: 'purple' | 'cyan' }
 interface Project { title: string; desc: string; tags: string[]; github: string; live?: string; color: string }
-interface Contest { rank: string; event: string; year: string; type: 'national' | 'icpc' | 'intra' }
+interface Contest { rank: string; event: string; year: string; type: 'national' | 'icpc' | 'intra' | 'collaborative' }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const STATS: StatCard[] = [
@@ -32,31 +32,38 @@ const TECH_STACK = [
 
 const PROJECTS: Project[] = [
   {
-    title: 'Durjog',
-    desc: 'Full-stack disaster assistance coordination platform built for real-time flood relief coordination, resource tracking, and emergency alerts.',
-    tags: ['React', 'Node.js', 'Express', 'MongoDB', 'REST API'],
-    github: 'https://github.com/SHOEBILL04',
+    title: 'TurfChai',
+    desc: 'Full-stack sports turf booking & slot management system built with React, Spring Boot, PostgreSQL/PLpgSQL, and custom CSS.',
+    tags: ['JavaScript 44.3%', 'Java 43.4%', 'CSS 8.9%', 'PL/pgSQL 2.6%'],
+    github: 'https://github.com/SHOEBILL04/TurfChai',
     color: '#8b5cf6',
   },
   {
-    title: 'Mela',
-    desc: 'Fair Management System handling stall allocation, logistics pipeline, and role-based access control for large-scale public events.',
-    tags: ['Laravel', 'MSSQL', 'PHP', 'JavaScript'],
-    github: 'https://github.com/SHOEBILL04',
-    color: '#06b6d4',
+    title: 'EcoCycle',
+    desc: 'Smart waste management & eco-friendly recycling reward platform promoting efficient disposal and sustainability tracking.',
+    tags: ['React', 'JavaScript', 'Node.js', 'Tailwind CSS'],
+    github: 'https://github.com/SHOEBILL04/EcoCycle',
+    color: '#10b981',
   },
   {
     title: 'Lantern',
     desc: 'Student study & habit tracker with real-time timers, JWT authentication, and comprehensive study file management.',
     tags: ['React', 'Vite', 'Laravel', 'SQL', 'REST API'],
-    github: 'https://github.com/SHOEBILL04',
+    github: 'https://github.com/SHOEBILL04/lantern',
     color: '#a855f7',
+  },
+  {
+    title: 'Mela',
+    desc: 'Fair Management System handling stall allocation, logistics pipeline, and role-based access control for large-scale public events.',
+    tags: ['Laravel', 'MSSQL', 'PHP', 'JavaScript'],
+    github: 'https://github.com/SHOEBILL04/MELA',
+    color: '#06b6d4',
   },
 ]
 
 const CONTESTS: Contest[] = [
   { rank: '44th', event: 'ICPC Dhaka Regional Site', year: '2025', type: 'icpc' },
-  { rank: '17th', event: 'BUBT IUPC National Programming Contest', year: '2025', type: 'national' },
+  { rank: '17th', event: 'BUBT IUPC Programming Contest', year: '2025', type: 'collaborative' },
   { rank: '25th', event: 'NWU CSE Fest Programming Contest', year: '2025', type: 'national' },
   { rank: '82nd', event: 'CUET IUPC National Programming Contest', year: '2025', type: 'national' },
   { rank: '2nd Runner-up', event: 'Intra-AUST Programming Contest (Carnival 6.0)', year: '2025', type: 'intra' },
@@ -149,6 +156,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     <div
       ref={ref}
       className="pin-card rounded-2xl overflow-hidden relative cursor-pointer group"
+      onClick={() => window.open(project.github, '_blank', 'noopener,noreferrer')}
       style={{
         background: 'rgba(255,255,255,0.02)',
         border: `1px solid ${hovered ? project.color + '40' : 'rgba(255,255,255,0.08)'}`,
@@ -252,6 +260,7 @@ function ContestBadge({ type }: { type: Contest['type'] }) {
   const map = {
     icpc: { label: 'ICPC', color: '#8b5cf6' },
     national: { label: 'NATIONAL', color: '#06b6d4' },
+    collaborative: { label: 'COLLABORATIVE', color: '#38bdf8' },
     intra: { label: 'INTRA', color: '#a855f7' },
   }
   const { label, color } = map[type]
@@ -338,7 +347,9 @@ export default function App() {
             </a>
           ))}
           <a
-            href="/resume.pdf"
+            href="./resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-3 py-1.5 rounded-full text-sm font-mono transition-all duration-200 hover:scale-105 ml-1"
             style={{ background: 'rgba(6,182,212,0.15)', border: '1px solid rgba(6,182,212,0.3)', color: '#06b6d4' }}
           >
@@ -402,7 +413,9 @@ export default function App() {
               {copied ? '✓ Copied!' : '📧 Copy Email'}
             </button>
             <a
-              href="/resume.pdf"
+              href="./resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-200 hover:scale-105"
               style={{
                 background: 'rgba(6,182,212,0.1)',
@@ -544,7 +557,7 @@ export default function App() {
           <h2 className="text-2xl font-bold text-white mb-2">Things I've Built</h2>
           <p className="text-slate-500 text-sm mb-10">Full-stack systems shipped from idea to deployment.</p>
 
-          <div className="projects-grid grid gap-5" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+          <div className="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {PROJECTS.map((project, i) => (
               <ProjectCard key={project.title} project={project} index={i} />
             ))}
@@ -586,7 +599,7 @@ export default function App() {
             <CapabilityCard
               icon="🎯"
               title="Leadership & Community"
-              desc="Deputy Coordinator at AUST Programming & Informatics Club and Blood Donation Club."
+              desc="Coordinator at AUST Programming & Informatics Club."
               color="#22d3ee"
               delay={300}
             />
@@ -609,22 +622,30 @@ export default function App() {
               <div className="font-mono text-xs text-slate-500 mb-4">ONLINE JUDGES — RATINGS</div>
               <div className="flex flex-col gap-3">
                 {[
-                  { platform: 'Codeforces', rating: '1262', label: 'Max Rating', color: '#8b5cf6', icon: 'CF' },
-                  { platform: 'CodeChef', rating: '3-Star', label: 'Rank', color: '#06b6d4', icon: 'CC' },
-                  { platform: 'AtCoder', rating: '472', label: 'Rating', color: '#a855f7', icon: 'AT' },
-                ].map(({ platform, rating, label, color, icon }) => (
-                  <div key={platform} className="flex items-center gap-3 px-4 py-3 rounded-xl"
-                    style={{ background: color + '08', border: `1px solid ${color}20` }}>
+                  { platform: 'Codeforces', rating: '1262', label: 'Max Rating', color: '#8b5cf6', icon: 'CF', url: 'https://codeforces.com/profile/SHOEBILL' },
+                  { platform: 'CodeChef', rating: '3-Star', label: 'Rank', color: '#06b6d4', icon: 'CC', url: 'https://www.codechef.com/users/shoebill' },
+                  { platform: 'AtCoder', rating: '664', label: 'Rating', color: '#a855f7', icon: 'AT', url: 'https://atcoder.jp/users/SHOEBILL_04' },
+                ].map(({ platform, rating, label, color, icon, url }) => (
+                  <a
+                    key={platform}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:scale-[1.02] cursor-pointer"
+                    style={{ background: color + '08', border: `1px solid ${color}20` }}
+                  >
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center font-mono text-xs font-bold"
                       style={{ background: color + '20', color }}>
                       {icon}
                     </div>
                     <div className="flex-1">
-                      <div className="text-white text-sm font-semibold">{platform}</div>
+                      <div className="text-white text-sm font-semibold flex items-center gap-1">
+                        {platform} <span className="text-xs opacity-60">↗</span>
+                      </div>
                       <div className="text-slate-500 text-xs">{label}</div>
                     </div>
                     <div className="font-mono font-bold text-sm" style={{ color }}>{rating}</div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </GlassCard>
