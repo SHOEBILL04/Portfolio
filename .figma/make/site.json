@@ -1,0 +1,10 @@
+{
+  "description": "Showcase your software engineering skills and projects with a sleek, dark-mode portfolio designed for developers, highlighting achievements and tech expertise.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
