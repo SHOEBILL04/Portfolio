@@ -16,14 +16,17 @@ const STATS: StatCard[] = [
 const TECH_STACK = [
   { name: 'C++', icon: '⚡' },
   { name: 'Python', icon: '🐍' },
+  { name: 'Java', icon: '☕' },
   { name: 'JavaScript', icon: '🟨' },
   { name: 'TypeScript', icon: '💙' },
   { name: 'React.js', icon: '⚛️' },
   { name: 'Next.js', icon: '▲' },
   { name: 'Node.js', icon: '🟢' },
   { name: 'Express.js', icon: '🚂' },
+  { name: 'Spring Boot', icon: '🌱' },
   { name: 'Laravel', icon: '🔴' },
   { name: 'PHP', icon: '🐘' },
+  { name: 'PostgreSQL', icon: '🐘' },
   { name: 'MongoDB', icon: '🍃' },
   { name: 'MySQL', icon: '🐬' },
   { name: 'MSSQL', icon: '🗄️' },
@@ -34,7 +37,7 @@ const PROJECTS: Project[] = [
   {
     title: 'TurfChai',
     desc: 'Full-stack sports turf booking & slot management system built with React, Spring Boot, PostgreSQL/PLpgSQL, and custom CSS.',
-    tags: ['JavaScript 44.3%', 'Java 43.4%', 'CSS 8.9%', 'PL/pgSQL 2.6%'],
+    tags: ['JavaScript', 'Java', 'Spring Boot', 'PostgreSQL', 'PL/pgSQL', 'CSS'],
     github: 'https://github.com/SHOEBILL04/TurfChai',
     color: '#8b5cf6',
   },
@@ -624,7 +627,7 @@ export default function App() {
                 {[
                   { platform: 'Codeforces', rating: '1262', label: 'Max Rating', color: '#8b5cf6', icon: 'CF', url: 'https://codeforces.com/profile/SHOEBILL' },
                   { platform: 'CodeChef', rating: '3-Star', label: 'Rank', color: '#06b6d4', icon: 'CC', url: 'https://www.codechef.com/users/shoebill' },
-                  { platform: 'AtCoder', rating: '664', label: 'Rating', color: '#a855f7', icon: 'AT', url: 'https://atcoder.jp/users/SHOEBILL_04' },
+                  { platform: 'AtCoder', rating: '665', label: 'Rating', color: '#a855f7', icon: 'AT', url: 'https://atcoder.jp/users/SHOEBILL_04' },
                 ].map(({ platform, rating, label, color, icon, url }) => (
                   <a
                     key={platform}
